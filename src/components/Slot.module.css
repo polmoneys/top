@@ -1,0 +1,73 @@
+/* 
+    Use slots for inputs, list items...
+    ie: list items override slot size
+    style="--end:calc(var(--start) * 1.5);" 
+*/
+
+.slot {
+  --slot: 2.4rem;
+  --start: var(--slot);
+  --end: var(--slot);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* height: max-content; */
+  /* word-break: break-word; */
+
+  &:has(.start):not(:has(.end)) {
+    grid-template-columns: var(--start) minmax(0, 1fr);
+  }
+  &:has(.end):not(:has(.start)) {
+    grid-template-columns: minmax(0, 1fr) var(--end);
+  }
+  /* if has slots or 3 children */
+  &:has(.start, .end),
+  &:has(> :nth-child(3):last-child) {
+    grid-template-columns: var(--start) minmax(0, 1fr) var(--end);
+  }
+  /* if it has > 3 children display error */
+  &:has(> :nth-child(4):last-child) {
+    background-color: var(--bg-active) !important;
+  }
+
+  & > .start,
+  & > .end {
+    display: inline-grid;
+    place-items: center;
+    place-content: center;
+    align-self: center;
+    align-items: center;
+    overflow: visible;
+  }
+
+  & > .start {
+    width: var(--start);
+    place-items: center;
+  }
+
+  & > .end {
+    width: var(--end);
+  }
+  & > *:not(.start, .end),
+  & > *:only-child {
+    display: grid;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 240px) and (max-width: 360px) {
+  .start {
+    display: none !important;
+  }
+
+  .slot {
+    grid-template-columns: 1fr !important;
+  }
+
+  .slot:has(.end) {
+    grid-template-columns: 1fr var(-end) !important;
+  }
+}

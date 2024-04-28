@@ -1,0 +1,22 @@
+.media {
+  overflow: hidden;
+  width: 100%;
+  z-index: var(--zero);
+}
+
+.media img {
+  border: 0;
+  border-style: none;
+  width: 100%;
+  max-width: 100%;
+  background-repeat: no-repeat;
+  --background-img-intensity: 0.95;
+  --background-img-saturate: 1.25;
+  height: 100%;
+  filter: brightness(var(--background-img-intensity))
+    saturate(var(--background-img-saturate));
+}
+
+.media img {
+  object-fit: cover;
+}

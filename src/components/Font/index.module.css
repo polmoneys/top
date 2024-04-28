@@ -1,0 +1,135 @@
+/* 
+@font-face {
+  font-family: 'my-font';
+  font-display: optional;
+  src: url(my-font.woff2) format('woff2');
+} 
+*/
+
+.helveticaNeue {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica', 'sans-serif';
+  font-weight: 400;
+  font-style: normal;
+}
+
+.helveticaNeueMedium {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica', 'sans-serif';
+  font-weight: 500;
+  font-style: normal;
+}
+.helveticaNeueBold {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica', 'sans-serif';
+  font-weight: 600;
+  font-style: bold;
+}
+
+.helveticaNeueThin {
+  font-family: 'Helvetica Neue LT Std', 'Helvetica', 'sans-serif';
+  font-weight: 300;
+  font-style: normal;
+}
+
+.grotesk {
+  /* font-family: 'Brandon Grotesque';
+  font-weight: 900;
+  font-style: normal; */
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 800;
+}
+
+.poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  --font-size-0: 0.75em;
+  --font-size-1: 1em;
+  --font-size-2: 1.25em;
+  --font-size-3: 1.6em;
+  --font-size-4: 2.5em;
+  --font-size-fluid-1: clamp(2rem, 9vw, 3.5rem);
+}
+.xs {
+  font-size: var(--font-size-0);
+}
+.sm {
+  font-size: var(--font-size-1);
+}
+.md {
+  font-size: var(--font-size-2);
+}
+.lg {
+  font-size: var(--font-size-3);
+}
+.xl {
+  font-size: var(--font-size-4);
+}
+
+:is(.xl, .lg) {
+  line-height: 1;
+  overflow-wrap: break-word;
+}
+
+:is(.xl, .lg)::first-letter {
+  text-transform: var(--shout);
+}
+
+.xl:has(b),
+.lg:has(b),
+.md:has(b),
+.sm:has(b) {
+  font-size: inherit;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.break {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.hyphenate {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.clamp {
+  --clamp-lines: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--clamp-lines);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis > * {
+  display: block;
+  overflow: hidden;
+  padding: var(--gap-1) var(--gap-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis:hover > * {
+  background-color: inherit;
+  contain: paint;
+  width: fit-content;
+  min-width: 100%;
+}
+
+.ellipsis-all-but-first-letter {
+  font-size: 0;
+  &::first-letter {
+    font-size: var(--font-size);
+  }
+}

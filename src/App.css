@@ -1,0 +1,15 @@
+main {
+  padding: var(--gap-3);
+}
+ul {
+  list-style-type: '';
+  margin: 0;
+  padding: 0;
+  width: min(750px, 90vw);
+
+  border: 1px solid orangered;
+
+  li {
+    border: 1px solid navy;
+  }
+}
