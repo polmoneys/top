@@ -12,6 +12,8 @@ Most components with complex user interactions might need to track a user choice
 
 Finally, `useBrowserTab` adds playfulness and intention to opening a new tab. 
 
+Bonus: `useItem` will help add temporary data to **T**.
+
 ### Components (5)
 
 When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless. 
@@ -24,6 +26,15 @@ Text is the most critical part of content so we abstract into `<Font/>` for some
 
 Dropping `src/index.css` onto your project will stabilize browsers. Omit if you have your own thing in place. 
 
+### Run tests
+
+I'm in `love` with Playwright **e2e** testing. 
+
+```bash
+
+$ yarn e2e
+
+```
 
 ### Inspiration
 
