@@ -4,16 +4,15 @@ import Font from './components/Font'
 import Shape from './components/Shape'
 import Slot from './components/Slot/Slot'
 import useMap from './hooks/useMap'
-// import useWeakmap from './hooks/useWeakmap'
 import useSet from './hooks/useSet'
 import useLeader from './hooks/useLeader'
-import Emoji from './Emoji'
 import useBrowserTab from './hooks/useBrowserTab'
 import useLine from './hooks/useLine'
 import { Ingredients, Badges, Selection } from './Interfaces'
-import './App.css'
 import Card from './Card'
 import Button from './Button'
+import Emoji from './Emoji'
+import './App.css'
 
 function App() {
   const { state, toggleEntry, appendEntriesFromArray } = useSet({
@@ -27,11 +26,6 @@ function App() {
     addObjectsFromArray,
     toggleObject,
   } = useMap<Selection>()
-  // const files = [
-  //   { id: 1, label: 'AAAA' },
-  //   { id: 2, label: 'bbbb' },
-  // ]
-  // const { read, update } = useWeakmap()
 
   const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
     useLeader<Ingredients>({
@@ -57,7 +51,12 @@ function App() {
   const openBrowser = useBrowserTab({
     url: 'https://polmoneys.com',
     title: 'author',
+    left: 200,
+    top: 200,
+    width: 300,
+    height: 450,
   })
+
   return (
     <main>
       <Font.Poppins as="h1">Title</Font.Poppins>
@@ -218,17 +217,6 @@ function App() {
       </section>
 
       <Button onClick={() => openBrowser()}>github</Button>
-      {/* {files.map(f => (
-        <button
-          type="button"
-          onClick={() => {
-            update(f, { niceLabel: f.id === 1 ? '1111' : '2222' })
-            console.log({ r: read(f) })
-          }}
-        >
-          do it
-        </button>
-      ))} */}
     </main>
   )
 }

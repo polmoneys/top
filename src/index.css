@@ -42,7 +42,7 @@
   --none: none !important;
 }
 
-/* make waves at everything behave */
+/* make "waves at everything" behave */
 *,
 :after,
 :before {
@@ -52,7 +52,6 @@
 * {
   margin: 0;
   padding: 0;
-  /* testing */
   scroll-behavior: smooth;
 }
 
@@ -79,7 +78,6 @@ body {
   inline-size: 100%;
 }
 
-/* imo text is the most important part of the interface */
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -120,7 +118,6 @@ p:has(span, b) {
   font-size: inherit;
 }
 
-/* enhance another staple, top 3 of fav CSS ever */
 a {
   hyphens: none;
   text-decoration: underline;
@@ -151,7 +148,7 @@ a[target='_blank']:after {
 }
 
 :is(a, button) {
-  /* debatable */
+  /* hot take */
   cursor: pointer;
 }
 
@@ -598,7 +595,6 @@ img {
     }
 */
 
-/* stabilize experience for humans with different needs */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
