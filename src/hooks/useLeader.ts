@@ -15,7 +15,7 @@ import { type ChangeEvent, useCallback, useMemo, useState } from 'react'
     })
 */
 
-function useLeader<T extends Record<keyof T, boolean>>(
+const useLeader = <T extends Record<keyof T, boolean>>(
   items: T,
 ): [
   {
@@ -28,7 +28,7 @@ function useLeader<T extends Record<keyof T, boolean>>(
     onLeadChange: () => void
     isSelected: (slice: string) => boolean
   },
-] {
+] => {
   const [mixedState, dispatchUpdate] = useState<T>(items)
 
   const allChecked = useMemo(() => {
@@ -61,7 +61,7 @@ function useLeader<T extends Record<keyof T, boolean>>(
         {},
       ) as T,
     )
-  }, [allChecked])
+  }, [allChecked, mixedState])
 
   const onFollowerChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

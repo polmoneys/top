@@ -33,7 +33,7 @@ function Media(props: MediaProps): JSX.Element {
     sourcesTags = Object.keys(sources).map(key => {
       const hasSource = sources?.[key] !== undefined
       const type = `image/${key}`
-      const srcSet = sources[key].toString()
+      const srcSet = sources[key]?.toString()
       return hasSource ? (
         <source key={key} type={type} srcSet={srcSet} />
       ) : (

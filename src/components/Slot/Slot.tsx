@@ -1,5 +1,5 @@
 import { CSSProperties, ComponentProps, ReactNode } from 'react'
-import styles from './Slot.module.css'
+import styles from './index.module.css'
 
 type Unit =
   | `var(--${string})`
@@ -23,9 +23,9 @@ interface Slot extends ComponentProps<'li'> {
 
 const has = (value: unknown) => value !== undefined
 
-export const SlotItem = (props: Slot): JSX.Element => {
+function Slot(props: Slot): JSX.Element {
   const { children, description, start, end, startWidth, endWidth } = props
-  const hasDescription = description !== undefined
+  const hasDescription = has(description)
   const hasStartAndEndWidth = has(startWidth) && has(endWidth)
   return (
     <li
@@ -52,3 +52,5 @@ export const SlotItem = (props: Slot): JSX.Element => {
     </li>
   )
 }
+
+export default Slot

@@ -25,7 +25,7 @@ export interface Props {
   }
 }
 
-function useBrowserTab(props: Props): () => void {
+const useBrowserTab = (props: Props) => {
   const {
     url,
     title,
