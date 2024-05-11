@@ -5,7 +5,7 @@ import {
   useMemo,
 } from 'react'
 import styles from './index.module.css'
-import { clsx } from '../../utils'
+import { clsx } from '../utils'
 
 const HTMLHnTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
 const HTMLtag = ['label', 'span', 'p', 'b', 'em', 'strong', 'time'] as const
