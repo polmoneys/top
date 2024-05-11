@@ -4,23 +4,21 @@
 
 ### Hooks (5)
 
-Some **data structures** are better than others when dealing with **collections** that you can select and toggle. `useSet` and `useMap` is all you need. Ofc feel free to use a Redux store instead of local state if you need to. 
+Some **data structures** are better than others when dealing with **collections** that you can select and toggle. `useSet` and `useMap` is all you need.  
 
-Another tool is `useLeader` that wraps an item (usually a checkbox) and a collection and keeps track of **indeterminate** state. 
+Another tool is `useLeader` that wraps an item (usually a checkbox) and a collection and keeps track of **indeterminate** state.
 
-Most components with complex user interactions might need to track a user choice and output more components accordingly. `useLine` is a lil' abstraction to let user choose them own **line of thought**. 
+Most components with complex user interactions might need to track a user choice and output more components accordingly. `useLine` let user choose them own **line of thought**. 
 
-Finally, `useBrowserTab` adds playfulness and intention to opening a new tab. 
-
-Bonus: `useItem` will help add temporary data to **T**.
+Finally, `useItem` will help add temporary data to **T**.
 
 ### Components (5)
 
-When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless. 
-
-Up next `<Slot/>`, which will work nicely as **item** of a `<Collection/>` but it's application is limitless as it provides a flexible start/end slot anywhere (hint: label + input, label + input + icon).
+When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless.`<Slot/>` adds start/end slots to an **item** of a `<Collection/>`.
  
-Text is the most critical part of content so we abstract into `<Font/>` for some sugar (hint: if you have lots of numbers to display have a prop for it). `<Picture/>` sort of same, and `<Shape/>` will draws SVG for us. 
+**Text** is the most critical part of content so we need a  `<Font/>`for some sugar (hint: if you have lots of numbers to display have a prop for it). `<Paper/>` embraces intrinsic grids with [multi column layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_multicol_layout) to envelope `<Font/>`. 
+
+`<Shape/>` will draw SVG shapes for us. 
 
 ### CSS
 
