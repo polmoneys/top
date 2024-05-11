@@ -1,3 +1,5 @@
+export const isApiSupported = (api: string) => api in window
+
 export const formatDate = (date: Date, locale = 'es-ES') =>
   new Intl.DateTimeFormat(locale).format(new Date(date))
 
@@ -9,11 +11,6 @@ export const getProp = (prop: string) =>
 
 export const setProp = (prop: string, replacement: string) =>
   document.documentElement.style.setProperty(prop, replacement)
-
-export const clsx = (...params: unknown[]): string =>
-  params.filter(Boolean).join(' ')
-
-export const isApiSupported = (api: string) => api in window
 
 // import ms from 'ms'
 

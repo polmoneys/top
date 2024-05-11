@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import Font from './components/Font'
+import Font from '../components/Font'
 
 interface Props {
   title: string

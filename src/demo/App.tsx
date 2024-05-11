@@ -1,18 +1,19 @@
 import { useEffect } from 'react'
-import Collection from './components/Collection'
-import Font from './components/Font'
-import Shape from './components/Shape'
-import Slot from './components/Slot/Slot'
-import useMap from './hooks/useMap'
-import useSet from './hooks/useSet'
-import useLeader from './hooks/useLeader'
-import useBrowserTab from './hooks/useBrowserTab'
-import useLine from './hooks/useLine'
+import Collection from '../components/Collection'
+import Font from '../components/Font'
+import Shape from '../components/Shape'
+import Slot from '../components/Slot/Slot'
+import useMap from '../hooks/useMap'
+import useSet from '../hooks/useSet'
+import useLeader from '../hooks/useLeader'
+import useBrowserTab from './useBrowserTab'
+import useLine from '../hooks/useLine'
 import { Ingredients, Badges, Selection } from './Interfaces'
 import Card from './Card'
 import Button from './Button'
 import Emoji from './Emoji'
-import './App.css'
+import './index.css'
+import Paper from '../components/Paper'
 
 function App() {
   const { state, toggleEntry, appendEntriesFromArray } = useSet({
@@ -49,8 +50,8 @@ function App() {
   }, [all, dispatch, mixed])
 
   const openBrowser = useBrowserTab({
-    url: 'https://polmoneys.com',
-    title: 'author',
+    url: 'https://github.com/polmoneys/top',
+    title: 'Get code !',
     left: 200,
     top: 200,
     width: 300,
@@ -217,6 +218,35 @@ function App() {
       </section>
 
       <Button onClick={() => openBrowser()}>github</Button>
+
+      <Paper columns="2 500px">
+        <Font>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          scelerisque mi ex, eu condimentum ligula sagittis at. Duis ultricies
+          sit amet libero ac porttitor. Proin nibh lorem, iaculis sed pulvinar
+          id, commodo eu erat. Aliquam at ante vel purus ornare ullamcorper sed
+          in turpis. Curabitur laoreet varius tristique. Vestibulum ac aliquet
+          felis, vitae pretium erat. Nunc mattis tincidunt sapien, ac
+          sollicitudin dui laoreet ac. Nunc tempus ligula tellus, ac rutrum sem
+          viverra interdum. Duis vitae aliquet elit. Aenean sed dui ut lorem
+          scelerisque consectetur eget non turpis.
+        </Font>
+        <Font>
+          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+          posuere cubilia curae; Integer at porttitor odio. Integer fermentum
+          magna sed tortor aliquam vulputate vel a lacus. Donec vel quam quis
+          sem consequat consectetur vel et velit. Nullam ac augue in neque
+          hendrerit ullamcorper ut et leo.
+        </Font>
+        <Font>
+          Donec ut urna quis augue sollicitudin tempus sit amet ut urna. Vivamus
+          et aliquam orci, in interdum urna. Cras ullamcorper nec justo quis
+          feugiat. Curabitur nec nisi placerat, congue metus sed, viverra quam.
+          Vivamus cursus, est ac eleifend ornare, elit est tincidunt purus, id
+          auctor mauris ante ac urna. Quisque rutrum porttitor tortor. Curabitur
+          eget sagittis massa, quis vulputate sapien.
+        </Font>
+      </Paper>
     </main>
   )
 }

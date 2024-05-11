@@ -8,13 +8,12 @@ type Values = string | number | boolean | Array<unknown>
   ]
   const { read, update } = useItem()
 
-
   {files.map(f => (
     <button
       type="button"
       onClick={() => {
-        update(f, { niceLabel: f.id === 1 ? '1111' : '2222' })
-        console.log({ r: read(f) })
+        update(f, { niceLabel: f.id === 1 ? 'Aaaa' : 'Bbbb' })
+        console.log({ metadata: read(f) })
       }}
     >
       Action

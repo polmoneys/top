@@ -51,7 +51,7 @@ const setReducer = (state: SetState, action: SetAction): SetState => {
 }
 
 interface Props {
-  initial?: Value[]
+  initial?: Array<Value>
 }
 
 export const useSet = (props?: Props) => {
@@ -81,7 +81,7 @@ export const useSet = (props?: Props) => {
   const hasSelections = (needles: Array<Value>, haystack: Array<Value>) => {
     let matches = 0
     for (let i = 0; i < haystack.length; i++) {
-      if (new Set(needles).has(haystack[i])) {
+      if (new Set(needles).has(haystack?.[i] ?? '')) {
         matches += 1
       }
     }
