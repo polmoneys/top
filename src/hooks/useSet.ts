@@ -1,12 +1,10 @@
 import { type Dispatch, useReducer } from 'react'
 
 type Value = string
-type SetState = Set<Value>
-const initialState: SetState = new Set()
 
 type SetAction =
   | {
-      type: 'APPEND_FROM_ARRAY'
+      type: 'ADD_FROM_ARRAY'
       names: Array<Value>
     }
   | {
@@ -18,14 +16,17 @@ type SetAction =
       name: Value
     }
   | {
-      type: 'CLEAR'
+      type: 'RESET'
     }
+
+type SetState = Set<Value>
+const initialState: SetState = new Set()
 
 const setReducer = (state: SetState, action: SetAction): SetState => {
   const { type } = action
 
   switch (type) {
-    case 'APPEND_FROM_ARRAY': {
+    case 'ADD_FROM_ARRAY': {
       const nextState = [...state.values(), ...action.names]
       return new Set(nextState)
     }
@@ -42,7 +43,7 @@ const setReducer = (state: SetState, action: SetAction): SetState => {
       nextState.delete(action.name)
       return nextState
     }
-    case 'CLEAR': {
+    case 'RESET': {
       return new Set()
     }
     default:
@@ -60,19 +61,14 @@ export const useSet = (props?: Props) => {
     new Set(props?.initial ?? initialState),
   )
 
-  const deleteEntry = (name: Value) => {
-    dispatch({ type: 'DELETE', name })
-  }
+  const deleteEntry = (name: Value) => dispatch({ type: 'DELETE', name })
 
-  const toggleEntry = (name: Value) => {
-    dispatch({ type: 'TOGGLE', name })
-  }
+  const toggleEntry = (name: Value) => dispatch({ type: 'TOGGLE', name })
 
-  const appendEntriesFromArray = (names: Array<Value>) => {
-    dispatch({ type: 'APPEND_FROM_ARRAY', names })
-  }
+  const addEntriesFromArray = (names: Array<Value>) =>
+    dispatch({ type: 'ADD_FROM_ARRAY', names })
 
-  const resetState = () => dispatch({ type: 'CLEAR' })
+  const resetState = () => dispatch({ type: 'RESET' })
 
   const getCount = () => state.size
 
@@ -93,7 +89,7 @@ export const useSet = (props?: Props) => {
     selectionsArray: Array.from(state.values()),
     count: getCount(),
     hasCount: getCount() > 0,
-    appendEntriesFromArray,
+    addEntriesFromArray,
     toggleEntry,
     deleteEntry,
     resetState,

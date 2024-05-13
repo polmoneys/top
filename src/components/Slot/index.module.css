@@ -1,6 +1,5 @@
 /* 
-    Use slots for inputs, list items...
-    ie: list items override slot size
+    override slot size
     style="--end:calc(var(--start) * 1.5);" 
 */
 

@@ -1,35 +1,20 @@
 import { useReducer } from 'react'
 
-/*
-    const {
-        selections,
-        selectionsArray,
-        count,
-        hasCount,
-        addObject,
-        addObjectsFromArray,
-        toggleObject,
-        deleteObject,
-        resetState,
-        getCount,
-        hasSelection,
-    } = useMap<Item>();
-*/
-type SelectionAction<T> =
+type MapAction<T> =
   | { type: 'ADD'; id: string; object: T }
   | { type: 'DELETE'; id: string }
   | { type: 'TOGGLE'; id: string; object: T }
   | { type: 'ADD_FROM_ARRAY'; objectsArray: T[] }
   | { type: 'RESET' }
 
-type SelectionState<T> = {
+type MapState<T> = {
   selections: Map<string, T>
 }
 
-const selectionReducer = <T>(
-  state: SelectionState<T>,
-  action: SelectionAction<T>,
-): SelectionState<T> => {
+const mapReducer = <T>(
+  state: MapState<T>,
+  action: MapAction<T>,
+): MapState<T> => {
   switch (action.type) {
     case 'ADD': {
       const nextMap = new Map(state.selections).set(action.id, action.object)
@@ -74,25 +59,20 @@ const selectionReducer = <T>(
 }
 
 const useMap = <T>() => {
-  const [state, dispatch] = useReducer(selectionReducer, {
+  const [state, dispatch] = useReducer(mapReducer, {
     selections: new Map<string, T>(),
   })
 
-  const addObject = (id: string, object: T) => {
+  const addObject = (id: string, object: T) =>
     dispatch({ type: 'ADD', id, object })
-  }
 
-  const deleteObject = (id: string) => {
-    dispatch({ type: 'DELETE', id })
-  }
+  const deleteObject = (id: string) => dispatch({ type: 'DELETE', id })
 
-  const toggleObject = (id: string, object: T) => {
+  const toggleObject = (id: string, object: T) =>
     dispatch({ type: 'TOGGLE', id, object })
-  }
 
-  const addObjectsFromArray = (objectsArray: T[]) => {
+  const addObjectsFromArray = (objectsArray: T[]) =>
     dispatch({ type: 'ADD_FROM_ARRAY', objectsArray })
-  }
 
   const resetState = () => dispatch({ type: 'RESET' })
 

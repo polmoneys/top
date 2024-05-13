@@ -1,6 +1,7 @@
 import { type ChangeEvent, useCallback, useMemo, useState } from 'react'
 
 /*
+
     interface Ingredients {
         mayo: boolean
         mustard: boolean
@@ -13,6 +14,7 @@ import { type ChangeEvent, useCallback, useMemo, useState } from 'react'
         mustard: true,
         ketchup: false,
     })
+
 */
 
 const useLeader = <T extends Record<keyof T, boolean>>(

@@ -1,29 +1,24 @@
 import { CSSProperties, ElementType, ReactNode } from 'react'
 import styles from './index.module.css'
+import { Unit, clsx } from '../utils'
 
-type Unit =
-  | `var(--${string})`
-  | `${string}em`
-  | `${string}rem`
-  | `${string}px`
-  | `${string}%`
-  | `${string}fr`
-  | `${string}vh`
-  | `${string}vw`
-  | `calc(${string})`
+const HTMLtag = [
+  'main',
+  'section',
+  'article',
+  'aside',
+  'div',
+  'form',
+  'fieldset',
+  'header',
+  'footer',
+] as const
+type HTMLTags = (typeof HTMLtag)[number]
 
-interface Paper {
-  as?:
-    | 'div'
-    | 'section'
-    | 'main'
-    | 'article'
-    | 'aside'
-    | 'form'
-    | 'fieldset'
-    | 'header'
-    | 'footer'
+export interface PaperProps {
+  as?: HTMLTags
   children: ReactNode
+  className?: string
   // intrinsic grid (if not enough space, falls to 1)
   columns: string
   // column-gap
@@ -42,7 +37,7 @@ interface Paper {
   mq?: Unit
 }
 
-function Paper(props: Paper): JSX.Element {
+function Paper(props: PaperProps): JSX.Element {
   const {
     as,
     children,
@@ -52,6 +47,7 @@ function Paper(props: Paper): JSX.Element {
     fill,
     columns = '2 200px',
     orphans = 1,
+    className,
   } = props
 
   const options = {
@@ -68,7 +64,7 @@ function Paper(props: Paper): JSX.Element {
   const Tag = as ?? ('div' as ElementType)
 
   return (
-    <Tag className={styles.root} style={options}>
+    <Tag className={clsx(styles.root, className)} style={options}>
       {children}
     </Tag>
   )

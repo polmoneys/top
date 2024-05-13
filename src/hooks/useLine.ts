@@ -1,6 +1,7 @@
 import { type Dispatch, type Reducer, useReducer } from 'react'
 
 /*
+
   interface SettingsMenu {
     account: string
     services: string
@@ -26,6 +27,7 @@ import { type Dispatch, type Reducer, useReducer } from 'react'
       </Fragment>
     )
   }
+
 */
 
 type Line<T extends string> = null | T

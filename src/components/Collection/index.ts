@@ -1,11 +1,12 @@
 import { ReactElement, cloneElement, isValidElement } from 'react'
+import Slot from '../Slot'
 
-interface Props<T> {
+export interface CollectionProps<T> {
   items: Array<T>
   item: (item: T) => ReactElement
 }
 
-function Collection<T>(props: Props<T>) {
+const Collection = <T>(props: CollectionProps<T>) => {
   const { items, item } = props
 
   return items.map(t => {
@@ -21,3 +22,5 @@ function Collection<T>(props: Props<T>) {
 }
 
 export default Collection
+
+Collection.Item = Slot

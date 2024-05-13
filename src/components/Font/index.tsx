@@ -5,21 +5,8 @@ import {
   useMemo,
 } from 'react'
 import styles from './index.module.css'
-import { clsx } from '../utils'
+import { clsx, has, sizeUnits } from '../utils'
 
-const HTMLHnTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
-const HTMLtag = ['label', 'span', 'p', 'b', 'em', 'strong', 'time'] as const
-type HTMLTags = (typeof HTMLtag)[number] | (typeof HTMLHnTag)[number]
-type TextTransform = 'aa' | 'Aa' | 'AA'
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const SIZES: Record<string, FontSize> = {
-  XS: 'xs',
-  SM: 'sm',
-  MD: 'md',
-  LG: 'lg',
-  XL: 'xl',
-}
 type FontKind =
   | 'helveticaNeue'
   | 'helveticaNeueMedium'
@@ -27,8 +14,12 @@ type FontKind =
   | 'helveticaNeueThin'
   | 'grotesk'
   | 'poppins'
-const sizeUnits = ['xs', 'sm', 'md', 'lg', 'xl'] as const
-export type FontSize = (typeof sizeUnits)[number]
+
+const HTMLHnTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const
+const HTMLtag = ['label', 'span', 'p', 'b', 'em', 'strong', 'time'] as const
+type HTMLTags = (typeof HTMLtag)[number] | (typeof HTMLHnTag)[number]
+type TextTransform = 'aa' | 'Aa' | 'AA'
+type FontSize = (typeof sizeUnits)[number]
 
 export interface FontProps extends AriaAttributes {
   as?: HTMLTags
@@ -77,8 +68,8 @@ function Font(props: FontProps): JSX.Element {
     <Tag
       {...rest}
       style={{
-        ...(dangerousColor !== undefined && { color: dangerousColor }),
-        ...(dangerousTransform !== undefined && {
+        ...(has(dangerousColor) && { color: dangerousColor }),
+        ...(has(dangerousTransform) && {
           transform: dangerousTransform,
         }),
       }}

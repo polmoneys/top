@@ -1,18 +1,8 @@
 import { CSSProperties, ComponentProps, ReactNode } from 'react'
 import styles from './index.module.css'
+import { Unit, has } from '../utils'
 
-type Unit =
-  | `var(--${string})`
-  | `${string}em`
-  | `${string}rem`
-  | `${string}px`
-  | `${string}%`
-  | `${string}fr`
-  | `${string}vh`
-  | `${string}vw`
-  | `calc(${string})`
-
-interface Slot extends ComponentProps<'li'> {
+export interface SlotProps extends ComponentProps<'li'> {
   children: string | ReactNode
   description?: string
   start?: ReactNode
@@ -21,9 +11,7 @@ interface Slot extends ComponentProps<'li'> {
   endWidth?: Unit
 }
 
-const has = (value: unknown) => value !== undefined
-
-function Slot(props: Slot): JSX.Element {
+function Slot(props: SlotProps): JSX.Element {
   const { children, description, start, end, startWidth, endWidth } = props
   const hasDescription = has(description)
   const hasStartAndEndWidth = has(startWidth) && has(endWidth)
