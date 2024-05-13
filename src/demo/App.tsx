@@ -1,22 +1,22 @@
 import { useEffect } from 'react'
 import Collection from '../components/Collection'
+import Group from '../components/Group'
 import Font from '../components/Font'
-import Shape from '../components/Shape'
-import Slot from '../components/Slot/Slot'
+import Paper from '../components/Paper'
+import useLeader from '../hooks/useLeader'
+import useLine from '../hooks/useLine'
 import useMap from '../hooks/useMap'
 import useSet from '../hooks/useSet'
-import useLeader from '../hooks/useLeader'
-import useBrowserTab from './useBrowserTab'
-import useLine from '../hooks/useLine'
-import { Ingredients, Badges, Selection } from './Interfaces'
-import Card from './Card'
+import Shape from './Shape'
 import Button from './Button'
+import Card from './Card'
 import Emoji from './Emoji'
+import { Badges, Ingredients, Selection } from './Interfaces'
+import useBrowserTab from './useBrowserTab'
 import './index.css'
-import Paper from '../components/Paper'
 
 function App() {
-  const { state, toggleEntry, appendEntriesFromArray } = useSet({
+  const { state, toggleEntry, addEntriesFromArray } = useSet({
     initial: ['Pol', 'Audrey'],
   })
 
@@ -63,19 +63,29 @@ function App() {
       <Font.Poppins as="h1">Title</Font.Poppins>
       <Font>SubTitle longer and longer and longer</Font>
 
-      <section className="intrinsic-grid md" style={{ gap: 'var(--gap-3)' }}>
+      <Group
+        as="section"
+        variant="grid"
+        className="intrinsic-grid md equal"
+        gap="var(--gap-3)"
+      >
         <Card title="UseLeader">
           <Shape.Circle fill="var(--salmon)" size={170} />
           <fieldset>
-            <div className="row lead-checkbox" style={{ gap: 'var(--gap-3)' }}>
-              <label htmlFor="all">
+            <Group.Row as="div" className="lead-checkbox " gap="var(--gap-3)">
+              <Group as="label" variant="grid" htmlFor="all">
                 <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
-              </label>
+              </Group>
               <input type="checkbox" id="all" onChange={() => onLeadChange()} />
               {all && <Shape className="dead" sides={4} size={36} />}
-            </div>
-
-            <label htmlFor="mayo">
+            </Group.Row>
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="mayo"
+              alignItems="center"
+            >
               <Font as="span"> MAYO</Font>
               <input
                 type="checkbox"
@@ -84,8 +94,14 @@ function App() {
                 onChange={event => onFollowerChange(event)}
               />
               {output['mayo'] && <Shape className="dead" sides={4} size={36} />}
-            </label>
-            <label htmlFor="mustard">
+            </Group>
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="mustard"
+              alignItems="center"
+            >
               <Font as="span"> MUSTARD</Font>
               <input
                 type="checkbox"
@@ -96,9 +112,14 @@ function App() {
               {output['mustard'] && (
                 <Shape className="dead" sides={4} size={36} />
               )}
-            </label>
-
-            <label htmlFor="ketchup">
+            </Group>
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="ketchup"
+              alignItems="center"
+            >
               <Font as="span"> KETCHUP</Font>
               <input
                 type="checkbox"
@@ -109,11 +130,63 @@ function App() {
               {output['ketchup'] && (
                 <Shape className="dead" sides={4} size={36} />
               )}
-            </label>
+            </Group>
           </fieldset>
         </Card>
+
+        <Card title="use">
+          <Group.Row as="div" gap="var(--gap-3)" className="lead-checkbox">
+            <Group as="label" variant="grid" htmlFor="all-2">
+              <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
+            </Group>
+            <input type="checkbox" id="all-2" onChange={() => onLeadChange()} />
+            {all && <Shape.Dead sides={4} size={36} />}
+          </Group.Row>
+
+          <div className="overflow x">
+            <Group.Table>
+              <Group.TableCaption>Sauces for meals </Group.TableCaption>
+              <Group.TableHead>
+                <Group.TableRow>
+                  <Group.TableHeadCell scope="col">
+                    Ingredient
+                  </Group.TableHeadCell>
+                  <Group.TableHeadCell scope="col">Method</Group.TableHeadCell>
+                </Group.TableRow>
+              </Group.TableHead>
+              <Group.TableBody>
+                <Group.TableRow>
+                  <Group.TableCell scope="row">MUSTARD</Group.TableCell>{' '}
+                  <Group.TableCell>Bla bla</Group.TableCell>
+                </Group.TableRow>
+                <Group.TableRow>
+                  <Group.TableCell scope="row">MAYO</Group.TableCell>{' '}
+                  <Group.TableCell>Blaa bla</Group.TableCell>
+                </Group.TableRow>
+                <Group.TableRow>
+                  <Group.TableCell scope="row">
+                    <label htmlFor="ketchup">
+                      <input
+                        type="checkbox"
+                        name="ketchup"
+                        onChange={event => onFollowerChange(event)}
+                        checked={output['ketchup']}
+                      />
+                      {output['ketchup'] && (
+                        <Shape className="dead" sides={4} size={36} />
+                      )}
+                      KETCHUP
+                    </label>
+                  </Group.TableCell>
+                  <Group.TableCell>bLA BLA</Group.TableCell>
+                </Group.TableRow>
+              </Group.TableBody>
+            </Group.Table>
+          </div>
+        </Card>
+
         <Card title="useMap">
-          <ul className="row flex-wrap" style={{ gap: 'var(--gap-1)' }}>
+          <Group.Row as="ul" flexWrap="wrap" gap="var(--gap-1)">
             <Collection<Selection>
               items={Array.from(
                 selections.values() as IterableIterator<Selection>,
@@ -136,8 +209,8 @@ function App() {
                 </Card.Mini>
               )}
             />
-          </ul>
-          <div className="row " style={{ gap: 'var(--gap-1)' }}>
+          </Group.Row>
+          <Group.Row as="div" gap="var(--gap-1)">
             <Button
               onClick={() =>
                 addObject('test-2', {
@@ -159,16 +232,16 @@ function App() {
             >
               Pack (2 for 1.5)
             </Button>
-          </div>
+          </Group.Row>
         </Card>
 
         <Card title="useSet">
-          <ul>
+          <Group.Col as="ul">
             <Collection<string>
               items={Array.from(state.values() as IterableIterator<string>)}
               item={item => {
                 return (
-                  <Slot
+                  <Collection.Item
                     key={item.toLocaleLowerCase()}
                     endWidth="calc(var(--start) * 3)"
                     end={
@@ -180,34 +253,81 @@ function App() {
                     description="javdjfaldjfaldjflasdj laj fdja l"
                   >
                     {item}
-                  </Slot>
+                  </Collection.Item>
                 )
               }}
             />
-          </ul>
+          </Group.Col>
 
-          <aside className="row" style={{ gap: 'var(--gap-3)' }}>
+          <Group.Row as="aside" gap="var(--gap-3)">
             <Card.Mini title="Adri + Marius">
-              <Button
-                onClick={() => appendEntriesFromArray(['Adri', 'Marius'])}
-              >
+              <Button onClick={() => addEntriesFromArray(['Adri', 'Marius'])}>
                 Add
               </Button>
             </Card.Mini>
             <Card.Mini title="Clara">
-              <Button onClick={() => appendEntriesFromArray(['Clara'])}>
+              <Button onClick={() => addEntriesFromArray(['Clara'])}>
                 Add
               </Button>
             </Card.Mini>
             <Card.Mini title="Audrey + Pol">
-              <Button onClick={() => appendEntriesFromArray(['Audrey', 'Pol'])}>
+              <Button onClick={() => addEntriesFromArray(['Audrey', 'Pol'])}>
                 Add
               </Button>
             </Card.Mini>
-          </aside>
+          </Group.Row>
         </Card>
-
         <Card title="useLine">
+          <fieldset>
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="alpha"
+            >
+              ALPHA
+              <input
+                type="radio"
+                name="alpha"
+                onChange={event =>
+                  console.log({ isAlpha: event.target.checked })
+                }
+              />
+            </Group>
+
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="beta"
+            >
+              BETA
+              <input
+                type="radio"
+                name="beta"
+                onChange={event =>
+                  console.log({ isBeta: event.target.checked })
+                }
+              />
+            </Group>
+            <Group
+              as="label"
+              variant="grid"
+              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
+              htmlFor="delta"
+            >
+              DELTA
+              <input
+                type="radio"
+                name="delta"
+                onChange={event =>
+                  console.log({ isDelta: event.target.checked })
+                }
+              />
+            </Group>
+            <input type="text" placeholder="type sososo" />
+          </fieldset>
+
           {badges === 'allIngredients' && (
             <Font.Poppins size="lg">EXCELENT CHOICE</Font.Poppins>
           )}
@@ -215,7 +335,7 @@ function App() {
             <Font.Poppins size="lg">BORING... </Font.Poppins>
           )}
         </Card>
-      </section>
+      </Group>
 
       <Button onClick={() => openBrowser()}>github</Button>
 
@@ -247,6 +367,54 @@ function App() {
           eget sagittis massa, quis vulputate sapien.
         </Font>
       </Paper>
+
+      <Group.ArtDirection as="div">
+        <Group.ArtDirectionItem as="div" span={6}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={6}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div">
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div">
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div">
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={3}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={3}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={3}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={3}>
+          <Shape size={200} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+        <Group.ArtDirectionItem as="div" span={2}>
+          <Shape size={120} />
+        </Group.ArtDirectionItem>
+      </Group.ArtDirection>
     </main>
   )
 }
