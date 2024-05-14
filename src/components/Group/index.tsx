@@ -1,60 +1,12 @@
 import {
-  type AriaAttributes,
   useMemo,
   type ElementType,
   type CSSProperties,
   type ReactNode,
-  type KeyboardEvent,
   ComponentProps,
 } from 'react'
 import { clsx, has } from '../utils'
-
-const HTMLtag = [
-  'section',
-  'article',
-  'nav',
-  'aside',
-  'header',
-  'footer',
-  'label',
-  'fieldset',
-  'p',
-  'h1',
-  'h2',
-  'h3',
-  'ul',
-  'ol',
-  'li',
-  'div',
-  'form',
-] as const
-type HTMLTags = (typeof HTMLtag)[number]
-
-const VariantOptions = ['flex', 'grid'] as const
-type Variants = (typeof VariantOptions)[number]
-
-export interface GroupProps extends AriaAttributes {
-  children: ReactNode
-  className?: string
-  as: HTMLTags
-  variant?: Variants
-  gap?: string
-  size?: string
-  id?: string
-  htmlFor?: string
-  onSubmit?: (event: unknown) => void
-  onKeyDown?: (event: KeyboardEvent<HTMLElement>) => void
-  stretch?: boolean
-  alignItems?: string
-  justifyContent?: string
-  flexWrap?: string
-  flexDirection?: string
-  placeItems?: string
-  DANGEROUS?: Record<string, string | number>
-  role?: string
-  hidden?: boolean
-  gridTemplateColumns?: string
-}
+import GroupProps from './Interfaces'
 
 const Group = (props: GroupProps): JSX.Element => {
   const {
@@ -86,8 +38,8 @@ const Group = (props: GroupProps): JSX.Element => {
     }
     if (variant === 'flex') {
       return {
-        display: 'flex',
         ...common,
+        display: 'flex',
         ...(has(flexDirection) && {
           flexDirection,
         }),
@@ -143,36 +95,35 @@ const Group = (props: GroupProps): JSX.Element => {
 
 export default Group
 
+// Flex
 Group.Row = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'row')} {...rest} />
 }
-
 Group.Col = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'column')} {...rest} />
 }
-
 Group.Unit = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'unit')} {...rest} />
 }
 
+// Aspect ratio
 Group.Square = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'ratio', 'square')} {...rest} />
 }
-
 Group.Landscape = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'ratio', 'landscape')} {...rest} />
 }
-
 Group.Portrait = (props: GroupProps) => {
   const { className, ...rest } = props
   return <Group className={clsx(className, 'ratio', 'portrait')} {...rest} />
 }
 
+// Good ol' grid
 Group.ArtDirection = (props: GroupProps) => {
   const { className, ...rest } = props
   return (
@@ -183,12 +134,10 @@ Group.ArtDirection = (props: GroupProps) => {
     />
   )
 }
-
 Group.ArtDirectionItem = (
   props: GroupProps & { span?: 2 | 3 | 4 | 6 | 12 },
 ) => {
   const { className, span = 4, ...rest } = props
-
   return (
     <Group
       {...rest}
@@ -198,6 +147,7 @@ Group.ArtDirectionItem = (
   )
 }
 
+// Table
 interface GroupTableProps extends ComponentProps<'table'> {
   children: ReactNode
 }

@@ -403,6 +403,8 @@ fieldset > *:not(*:last-child) {
 }
 
 .gap {
+  gap: var(--gap-2);
+
   &.sm {
     gap: var(--gap-1);
   }
@@ -418,6 +420,7 @@ fieldset > *:not(*:last-child) {
 }
 
 .padding-xy {
+  padding: var(--gap-2);
   &.sm {
     padding: var(--gap-1);
   }
@@ -751,6 +754,14 @@ img {
   display: none !important;
 }
 
+.dead {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /*
     Custom CSS properties can act as 'toggles':
     
@@ -790,5 +801,11 @@ img {
   }
 }
 
-/* @media (scripting: none) {
-    }  */
+/* 
+
+@media (scripting: none) {
+    } 
+@media not (selector(: has(*))) {
+  }
+  
+    */
