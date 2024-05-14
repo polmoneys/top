@@ -1,6 +1,37 @@
-main {
-  padding: var(--gap-3);
+/* PORT TO ../INDEX.CSS */
+input[type='radio']:focus,
+input[type='checkbox']:not(table *):focus {
+  background-color: var(--bg-active);
 }
+
+input[type='checkbox']:checked:after {
+  content: '✔︎';
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+
+input[type='checkbox'].none:after {
+  content: '✘';
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+
+input[type='radio']:checked:after {
+  content: '●';
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+input[type='checkbox']:indeterminate:after,
+input[type='checkbox'].indeterminate:after {
+  content: '⁃';
+  display: grid;
+  place-content: center;
+  height: 100%;
+}
+/* END PORT TO ../INDEX.CSS */
 
 .card {
   aspect-ratio: 9/10;
@@ -22,31 +53,6 @@ main {
   }
 }
 
-.dead {
-  pointer-events: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-label:has([type='checkbox']) {
-  position: relative;
-}
-
-[type='checkbox'] + svg {
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
-  z-index: 99;
-}
-
-input[type='radio']:focus,
-input[type='checkbox']:not(table *):focus {
-  background-color: var(--bg-active);
-}
-
 [aria-label='close'] {
   filter: brightness(0);
   /* filter: hue-rotate(120deg); */
@@ -56,13 +62,15 @@ table {
   border: 1px solid navy;
 }
 
-.lead-checkbox {
-  position: relative;
+.button {
+  color: #4b5563;
+  background-color: #f3f4f6;
+  &:hover  {
+    color: #9ca3af;
+    background-color: #e5e7eb;
+  }
 }
-.lead-checkbox [type='checkbox'] + svg {
-  right: auto;
-  left: calc(var(--hit-area-width) - 46px);
-}
+
 ul {
   list-style-type: '';
   margin: 0;

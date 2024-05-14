@@ -1,18 +1,17 @@
 import { useEffect } from 'react'
+import { Badges, Ingredients, Selection } from './Interfaces'
 import Collection from '../components/Collection'
-import Group from '../components/Group'
 import Font from '../components/Font'
-import Paper from '../components/Paper'
+import Group from '../components/Group'
 import useLeader from '../hooks/useLeader'
 import useLine from '../hooks/useLine'
 import useMap from '../hooks/useMap'
 import useSet from '../hooks/useSet'
-import Shape from './Shape'
+import useBrowserTab from './useBrowserTab'
 import Button from './Button'
 import Card from './Card'
 import Emoji from './Emoji'
-import { Badges, Ingredients, Selection } from './Interfaces'
-import useBrowserTab from './useBrowserTab'
+import Shape from './Shape'
 import './index.css'
 
 function App() {
@@ -59,7 +58,12 @@ function App() {
   })
 
   return (
-    <main>
+    <Group
+      as="main"
+      variant="grid"
+      gridTemplateColumns="1fr"
+      className="padding-xy"
+    >
       <Font.Poppins as="h1">Title</Font.Poppins>
       <Font>SubTitle longer and longer and longer</Font>
 
@@ -71,13 +75,18 @@ function App() {
       >
         <Card title="UseLeader">
           <Shape.Circle fill="var(--salmon)" size={170} />
-          <fieldset>
-            <Group.Row as="div" className="lead-checkbox " gap="var(--gap-3)">
+          <Group.Col as="fieldset" gap="var(--gap-1)">
+            <Group.Row as="div" gap="var(--gap-3)">
               <Group as="label" variant="grid" htmlFor="all">
                 <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
               </Group>
-              <input type="checkbox" id="all" onChange={() => onLeadChange()} />
-              {all && <Shape className="dead" sides={4} size={36} />}
+              <input
+                type="checkbox"
+                id="all"
+                onChange={() => onLeadChange()}
+                {...(mixed && { className: 'indeterminate' })}
+                {...(!mixed && !all && { className: 'none' })}
+              />
             </Group.Row>
             <Group
               as="label"
@@ -93,7 +102,6 @@ function App() {
                 checked={output['mayo']}
                 onChange={event => onFollowerChange(event)}
               />
-              {output['mayo'] && <Shape className="dead" sides={4} size={36} />}
             </Group>
             <Group
               as="label"
@@ -109,9 +117,6 @@ function App() {
                 checked={output['mustard']}
                 onChange={event => onFollowerChange(event)}
               />
-              {output['mustard'] && (
-                <Shape className="dead" sides={4} size={36} />
-              )}
             </Group>
             <Group
               as="label"
@@ -127,20 +132,16 @@ function App() {
                 onChange={event => onFollowerChange(event)}
                 checked={output['ketchup']}
               />
-              {output['ketchup'] && (
-                <Shape className="dead" sides={4} size={36} />
-              )}
             </Group>
-          </fieldset>
+          </Group.Col>
         </Card>
 
         <Card title="use">
-          <Group.Row as="div" gap="var(--gap-3)" className="lead-checkbox">
+          <Group.Row as="div" gap="var(--gap-3)">
             <Group as="label" variant="grid" htmlFor="all-2">
               <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
             </Group>
             <input type="checkbox" id="all-2" onChange={() => onLeadChange()} />
-            {all && <Shape.Dead sides={4} size={36} />}
           </Group.Row>
 
           <div className="overflow x">
@@ -156,27 +157,44 @@ function App() {
               </Group.TableHead>
               <Group.TableBody>
                 <Group.TableRow>
-                  <Group.TableCell scope="row">MUSTARD</Group.TableCell>{' '}
+                  <Group.TableCell scope="row">
+                    <Group as="label" variant="grid" htmlFor="mustard">
+                      <input
+                        type="checkbox"
+                        name="mustard"
+                        onChange={event => onFollowerChange(event)}
+                        checked={output['mayo']}
+                      />
+                      MUSTARD
+                    </Group>
+                  </Group.TableCell>
                   <Group.TableCell>Bla bla</Group.TableCell>
                 </Group.TableRow>
                 <Group.TableRow>
-                  <Group.TableCell scope="row">MAYO</Group.TableCell>{' '}
+                  <Group.TableCell scope="row">
+                    <Group as="label" variant="grid" htmlFor="mayo">
+                      <input
+                        type="checkbox"
+                        name="mayo"
+                        onChange={event => onFollowerChange(event)}
+                        checked={output['mayo']}
+                      />
+                      MAYO
+                    </Group>
+                  </Group.TableCell>
                   <Group.TableCell>Blaa bla</Group.TableCell>
                 </Group.TableRow>
                 <Group.TableRow>
                   <Group.TableCell scope="row">
-                    <label htmlFor="ketchup">
+                    <Group as="label" variant="grid" htmlFor="ketchup">
                       <input
                         type="checkbox"
                         name="ketchup"
                         onChange={event => onFollowerChange(event)}
                         checked={output['ketchup']}
                       />
-                      {output['ketchup'] && (
-                        <Shape className="dead" sides={4} size={36} />
-                      )}
                       KETCHUP
-                    </label>
+                    </Group>
                   </Group.TableCell>
                   <Group.TableCell>bLA BLA</Group.TableCell>
                 </Group.TableRow>
@@ -278,7 +296,7 @@ function App() {
           </Group.Row>
         </Card>
         <Card title="useLine">
-          <fieldset>
+          <Group.Col as="fieldset" gap="var(--gap-1)">
             <Group
               as="label"
               variant="grid"
@@ -326,7 +344,7 @@ function App() {
               />
             </Group>
             <input type="text" placeholder="type sososo" />
-          </fieldset>
+          </Group.Col>
 
           {badges === 'allIngredients' && (
             <Font.Poppins size="lg">EXCELENT CHOICE</Font.Poppins>
@@ -338,35 +356,6 @@ function App() {
       </Group>
 
       <Button onClick={() => openBrowser()}>github</Button>
-
-      <Paper columns="2 500px">
-        <Font>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          scelerisque mi ex, eu condimentum ligula sagittis at. Duis ultricies
-          sit amet libero ac porttitor. Proin nibh lorem, iaculis sed pulvinar
-          id, commodo eu erat. Aliquam at ante vel purus ornare ullamcorper sed
-          in turpis. Curabitur laoreet varius tristique. Vestibulum ac aliquet
-          felis, vitae pretium erat. Nunc mattis tincidunt sapien, ac
-          sollicitudin dui laoreet ac. Nunc tempus ligula tellus, ac rutrum sem
-          viverra interdum. Duis vitae aliquet elit. Aenean sed dui ut lorem
-          scelerisque consectetur eget non turpis.
-        </Font>
-        <Font>
-          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-          posuere cubilia curae; Integer at porttitor odio. Integer fermentum
-          magna sed tortor aliquam vulputate vel a lacus. Donec vel quam quis
-          sem consequat consectetur vel et velit. Nullam ac augue in neque
-          hendrerit ullamcorper ut et leo.
-        </Font>
-        <Font>
-          Donec ut urna quis augue sollicitudin tempus sit amet ut urna. Vivamus
-          et aliquam orci, in interdum urna. Cras ullamcorper nec justo quis
-          feugiat. Curabitur nec nisi placerat, congue metus sed, viverra quam.
-          Vivamus cursus, est ac eleifend ornare, elit est tincidunt purus, id
-          auctor mauris ante ac urna. Quisque rutrum porttitor tortor. Curabitur
-          eget sagittis massa, quis vulputate sapien.
-        </Font>
-      </Paper>
 
       <Group.ArtDirection as="div">
         <Group.ArtDirectionItem as="div" span={6}>
@@ -415,7 +404,7 @@ function App() {
           <Shape size={120} />
         </Group.ArtDirectionItem>
       </Group.ArtDirection>
-    </main>
+    </Group>
   )
 }
 
