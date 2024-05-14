@@ -32,7 +32,7 @@ function Slot(props: SlotProps): JSX.Element {
       })}
     >
       {has(start) && <div className={styles.start}>{start}</div>}
-      <div>
+      <div className={styles.content}>
         {children}
         {hasDescription && <div>{description}</div>}
       </div>

@@ -43,7 +43,7 @@ function lineReducer<T extends string>(
   return action
 }
 
-const useLine = <T extends string>(): [Line<T>, Dispatch<Line<T>>] =>
-  useReducer<Reducer<Line<T>, Line<T>>>(lineReducer, null)
+const useLine = <T extends string>(initial?: T): [Line<T>, Dispatch<Line<T>>] =>
+  useReducer<Reducer<Line<T>, Line<T>>>(lineReducer, initial ?? null)
 
 export default useLine

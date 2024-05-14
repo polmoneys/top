@@ -55,6 +55,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  & > .content {
+    align-items: center;
+  }
 }
 
 @media (min-width: 240px) and (max-width: 360px) {

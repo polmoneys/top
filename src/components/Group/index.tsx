@@ -7,6 +7,7 @@ import {
 } from 'react'
 import { clsx, has } from '../utils'
 import GroupProps from './Interfaces'
+import styles from './index.module.css'
 
 const Group = (props: GroupProps): JSX.Element => {
   const {
@@ -23,6 +24,7 @@ const Group = (props: GroupProps): JSX.Element => {
     DANGEROUS,
     stretch,
     gridTemplateColumns,
+    className,
     ...rest
   } = props
 
@@ -47,7 +49,8 @@ const Group = (props: GroupProps): JSX.Element => {
           justifyContent,
         }),
         ...(has(flexWrap) && { flexWrap }),
-        ...(has(size) && { flex: `1 0 ${size}` }),
+
+        ...(has(size) && { '--group-size': size }),
         ...(has(stretch) && {
           width: '100%',
           height: '100%',
@@ -78,11 +81,14 @@ const Group = (props: GroupProps): JSX.Element => {
     variant,
   ]) as CSSProperties
 
+  const classNames = clsx(className, has(size) && styles.size)
+
   const Tag = as ?? ('div' as ElementType)
 
   return (
     <Tag
       {...rest}
+      className={classNames}
       style={{
         ...options,
         ...(has(DANGEROUS) && DANGEROUS),

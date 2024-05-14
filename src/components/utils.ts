@@ -7,6 +7,8 @@ export const sizeUnits = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 
 export type Unit =
   | `var(--${string})`
+  | `min(${string})`
+  | `max(${string})`
   | `${string}em`
   | `${string}rem`
   | `${string}px`
