@@ -1,32 +1,29 @@
 ## TLDR
 
-**Top 10** favorite React LOC that live happily on prod. 
+My favorite React LOC that live happily on prod. 
 
 ### Hooks (5)
 
-Some **data structures** are better than others when dealing with **collections** that you can select and toggle. `useSet` and `useMap` is all you need.  
+Some **data structures** are better than others when dealing with **collections** that you can select and toggle. `useSet` and `useMap` at your disposal. 
 
-Another tool is `useLeader` that wraps an item (usually a checkbox) and a collection and keeps track of **indeterminate** state.
+`useLeader` wraps an item (usually a checkbox) and a collection of other checkboxes and keeps track of **indeterminate** state while selecting/unselecting them.
 
 Most components with complex user interactions might need to track a user choice and output more components accordingly. `useLine` let user choose them own **line of thought**. 
 
 Finally, `useItem` will help add temporary data to **T**.
 
-### Components (5)
+### Components (4)
 
-When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless.`<Slot/>` adds start/end slots to an **item** of a `<Collection/>`.
+`<Group/>` can be used by itself or in any of it's specialized variants, usually with more **semantics**. It routes props into classNames from `src/index.css`, I've played with tailwind and **cva**, will stick to this file for now.
+
+When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless.`<Slot/>` adds start/end slots to an **item** of a `<Collection/>`, can be consumed as `<Collection.Item/>` for convenience.
  
-**Text** is the most critical part of content so we need a  `<Font/>`for some sugar (hint: if you have lots of numbers to display have a prop for it). `<Paper/>` embraces intrinsic grids with [multi column layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_multicol_layout) to envelope `<Font/>`. 
+**Text** is the most critical part of content so we need a  `<Font/>`for some sugar (hint: if you have lots of numbers to display have a prop for it). 
 
-`<Shape/>` will draw SVG shapes for us. 
 
-### CSS
+### Tests
 
-Dropping `src/index.css` onto your project will stabilize browsers. Omit if you have your own thing in place. 
-
-### Run tests
-
-I'm in `love` with Playwright **e2e** testing. 
+I'm in `love` with Playwright **e2e** testing as it gives me a **user clicking on things in the screen** so probably will never write 1 more unit test ever again.  
 
 ```bash
 
