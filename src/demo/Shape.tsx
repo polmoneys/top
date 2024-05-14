@@ -1,7 +1,7 @@
 import { useMemo, memo, ComponentProps } from 'react'
 import { has } from '../components/utils'
 
-export interface ShapeProps extends ComponentProps<'div'> {
+export interface ShapeProps extends ComponentProps<'svg'> {
   sides?: number
   size?: number
   fill?: string
@@ -19,6 +19,7 @@ const Shape = (props: ShapeProps): JSX.Element => {
     className,
     stroke = 'currentColor',
     strokeWidth,
+    viewBox,
   } = props
 
   const shapePathD = useMemo(() => {
@@ -27,11 +28,11 @@ const Shape = (props: ShapeProps): JSX.Element => {
     return polygon(center, center, clamped, center)
   }, [sides, size])
 
-  const viewbox = `0 0 ${size} ${size}`
+  const box = has(viewBox) ? viewBox : `0 0 ${size} ${size}`
   return (
     <svg
       aria-hidden="true"
-      viewBox={viewbox}
+      viewBox={box}
       width={size}
       height={size}
       fill={fill}

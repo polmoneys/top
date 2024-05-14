@@ -34,7 +34,6 @@ input[type='checkbox'].indeterminate:after {
 /* END PORT TO ../INDEX.CSS */
 
 .card {
-  aspect-ratio: 9/10;
   background-color: var(--brown);
   padding: var(--gap-1);
 }

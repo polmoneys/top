@@ -34,14 +34,14 @@ function App() {
       ketchup: false,
     })
 
-  const [badges, dispatch] = useLine<keyof Badges>()
+  const [badges, dispatch] = useLine<keyof Badges>('some')
 
   useEffect(() => {
     if (all) {
       dispatch('allIngredients')
     }
     if (mixed) {
-      dispatch(null)
+      dispatch('some')
     }
     if (!all && !mixed) {
       dispatch('none')
@@ -60,93 +60,33 @@ function App() {
   return (
     <Group
       as="main"
-      variant="grid"
-      gridTemplateColumns="1fr"
+      variant="flex"
+      flexDirection="column"
+      gap="var(--gap-2)"
       className="padding-xy"
     >
       <Font.Poppins as="h1">Title</Font.Poppins>
       <Font>SubTitle longer and longer and longer</Font>
 
-      <Group
-        as="section"
-        variant="grid"
-        className="intrinsic-grid md equal"
-        gap="var(--gap-3)"
-      >
-        <Card title="UseLeader">
-          <Shape.Circle fill="var(--salmon)" size={170} />
-          <Group.Col as="fieldset" gap="var(--gap-1)">
-            <Group.Row as="div" gap="var(--gap-3)">
-              <Group as="label" variant="grid" htmlFor="all">
-                <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
-              </Group>
-              <input
-                type="checkbox"
-                id="all"
-                onChange={() => onLeadChange()}
-                {...(mixed && { className: 'indeterminate' })}
-                {...(!mixed && !all && { className: 'none' })}
-              />
-            </Group.Row>
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="mayo"
-              alignItems="center"
-            >
-              <Font as="span"> MAYO</Font>
-              <input
-                type="checkbox"
-                name="mayo"
-                checked={output['mayo']}
-                onChange={event => onFollowerChange(event)}
-              />
-            </Group>
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="mustard"
-              alignItems="center"
-            >
-              <Font as="span"> MUSTARD</Font>
-              <input
-                type="checkbox"
-                name="mustard"
-                checked={output['mustard']}
-                onChange={event => onFollowerChange(event)}
-              />
-            </Group>
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="ketchup"
-              alignItems="center"
-            >
-              <Font as="span"> KETCHUP</Font>
-              <input
-                type="checkbox"
-                name="ketchup"
-                onChange={event => onFollowerChange(event)}
-                checked={output['ketchup']}
-              />
-            </Group>
-          </Group.Col>
-        </Card>
-
-        <Card title="use">
+      <Group as="section" flexWrap="wrap" size="550px" gap="var(--gap-1)">
+        <Card title="A">
           <Group.Row as="div" gap="var(--gap-3)">
-            <Group as="label" variant="grid" htmlFor="all-2">
+            <Group as="label" variant="grid" htmlFor="leader-checkbox">
               <Font as="span">{all ? 'All' : mixed ? 'Some' : 'None'}</Font>
             </Group>
-            <input type="checkbox" id="all-2" onChange={() => onLeadChange()} />
+            <input
+              type="checkbox"
+              id="leader-checkbox"
+              onChange={() => onLeadChange()}
+              {...(mixed && { className: 'indeterminate' })}
+              {...(!mixed && !all && { className: 'none' })}
+            />
           </Group.Row>
 
           <div className="overflow x">
             <Group.Table>
-              <Group.TableCaption>Sauces for meals </Group.TableCaption>
+              {/* <Group.TableCaption>Sauces for meals </Group.TableCaption> */}
+
               <Group.TableHead>
                 <Group.TableRow>
                   <Group.TableHeadCell scope="col">
@@ -158,21 +98,47 @@ function App() {
               <Group.TableBody>
                 <Group.TableRow>
                   <Group.TableCell scope="row">
-                    <Group as="label" variant="grid" htmlFor="mustard">
+                    <Group
+                      as="label"
+                      variant="grid"
+                      htmlFor="mustard"
+                      gridTemplateColumns="calc(var(--hit-area-width) / 3) 1fr"
+                      alignItems="center"
+                    >
                       <input
                         type="checkbox"
                         name="mustard"
                         onChange={event => onFollowerChange(event)}
-                        checked={output['mayo']}
+                        checked={output['mustard']}
                       />
                       MUSTARD
                     </Group>
                   </Group.TableCell>
-                  <Group.TableCell>Bla bla</Group.TableCell>
+                  <Group.TableCell>
+                    <Group
+                      variant="grid"
+                      as="div"
+                      gridTemplateColumns="repeat(6,1fr)"
+                      className="overflow x"
+                    >
+                      <Shape sides={3} size={48} />
+                      <Shape sides={4} size={48} />
+                      <Shape sides={5} size={48} />
+                      <Shape sides={6} size={48} />
+                      <Shape sides={7} size={48} />
+                      <Shape sides={8} size={48} />
+                    </Group>
+                  </Group.TableCell>
                 </Group.TableRow>
                 <Group.TableRow>
                   <Group.TableCell scope="row">
-                    <Group as="label" variant="grid" htmlFor="mayo">
+                    <Group
+                      as="label"
+                      variant="grid"
+                      htmlFor="mayo"
+                      gridTemplateColumns="calc(var(--hit-area-width) / 3) 1fr"
+                      alignItems="center"
+                    >
                       <input
                         type="checkbox"
                         name="mayo"
@@ -182,11 +148,31 @@ function App() {
                       MAYO
                     </Group>
                   </Group.TableCell>
-                  <Group.TableCell>Blaa bla</Group.TableCell>
+                  <Group.TableCell>
+                    <Group
+                      variant="grid"
+                      as="div"
+                      gridTemplateColumns="repeat(6,1fr)"
+                      className="overflow x"
+                    >
+                      <Shape sides={3} size={48} />
+                      <Shape sides={4} size={48} />
+                      <Shape sides={5} size={48} />
+                      <Shape sides={6} size={48} />
+                      <Shape sides={7} size={48} />
+                      <Shape sides={8} size={48} />
+                    </Group>
+                  </Group.TableCell>
                 </Group.TableRow>
                 <Group.TableRow>
                   <Group.TableCell scope="row">
-                    <Group as="label" variant="grid" htmlFor="ketchup">
+                    <Group
+                      as="label"
+                      variant="grid"
+                      htmlFor="ketchup"
+                      gridTemplateColumns="calc(var(--hit-area-width) / 3) 1fr"
+                      alignItems="center"
+                    >
                       <input
                         type="checkbox"
                         name="ketchup"
@@ -196,14 +182,28 @@ function App() {
                       KETCHUP
                     </Group>
                   </Group.TableCell>
-                  <Group.TableCell>bLA BLA</Group.TableCell>
+                  <Group.TableCell>
+                    <Group
+                      variant="grid"
+                      as="div"
+                      gridTemplateColumns="repeat(6,1fr)"
+                      className="overflow x"
+                    >
+                      <Shape sides={3} size={48} />
+                      <Shape sides={4} size={48} />
+                      <Shape sides={5} size={48} />
+                      <Shape sides={6} size={48} />
+                      <Shape sides={7} size={48} />
+                      <Shape sides={8} size={48} />
+                    </Group>
+                  </Group.TableCell>
                 </Group.TableRow>
               </Group.TableBody>
             </Group.Table>
           </div>
         </Card>
 
-        <Card title="useMap">
+        <Card title="B">
           <Group.Row as="ul" flexWrap="wrap" gap="var(--gap-1)">
             <Collection<Selection>
               items={Array.from(
@@ -253,7 +253,7 @@ function App() {
           </Group.Row>
         </Card>
 
-        <Card title="useSet">
+        <Card title="C">
           <Group.Col as="ul">
             <Collection<string>
               items={Array.from(state.values() as IterableIterator<string>)}
@@ -261,16 +261,15 @@ function App() {
                 return (
                   <Collection.Item
                     key={item.toLocaleLowerCase()}
-                    endWidth="calc(var(--start) * 3)"
+                    endWidth="calc(var(--start) * 1.5)"
                     end={
                       <Button onClick={() => toggleEntry(item)}>
                         <Emoji name="close" />
                       </Button>
                     }
-                    start={<Shape.Triangle size={24} />}
-                    description="javdjfaldjfaldjflasdj laj fdja l"
+                    start={<Shape.Triangle size={24} viewBox="0 -3 24 25" />}
                   >
-                    {item}
+                    <Font> {item}</Font>
                   </Collection.Item>
                 )
               }}
@@ -295,115 +294,20 @@ function App() {
             </Card.Mini>
           </Group.Row>
         </Card>
-        <Card title="useLine">
-          <Group.Col as="fieldset" gap="var(--gap-1)">
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="alpha"
-            >
-              ALPHA
-              <input
-                type="radio"
-                name="alpha"
-                onChange={event =>
-                  console.log({ isAlpha: event.target.checked })
-                }
-              />
-            </Group>
-
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="beta"
-            >
-              BETA
-              <input
-                type="radio"
-                name="beta"
-                onChange={event =>
-                  console.log({ isBeta: event.target.checked })
-                }
-              />
-            </Group>
-            <Group
-              as="label"
-              variant="grid"
-              gridTemplateColumns="1fr calc(var(--hit-area-width) / 3)"
-              htmlFor="delta"
-            >
-              DELTA
-              <input
-                type="radio"
-                name="delta"
-                onChange={event =>
-                  console.log({ isDelta: event.target.checked })
-                }
-              />
-            </Group>
-            <input type="text" placeholder="type sososo" />
-          </Group.Col>
-
+        <Card title="D">
           {badges === 'allIngredients' && (
             <Font.Poppins size="lg">EXCELENT CHOICE</Font.Poppins>
           )}
           {badges === 'none' && (
             <Font.Poppins size="lg">BORING... </Font.Poppins>
           )}
+          {badges === 'some' && (
+            <Font.Poppins size="lg">Select ingredients on A </Font.Poppins>
+          )}
         </Card>
       </Group>
 
       <Button onClick={() => openBrowser()}>github</Button>
-
-      <Group.ArtDirection as="div">
-        <Group.ArtDirectionItem as="div" span={6}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={6}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div">
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div">
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div">
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={3}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={3}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={3}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={3}>
-          <Shape size={200} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-        <Group.ArtDirectionItem as="div" span={2}>
-          <Shape size={120} />
-        </Group.ArtDirectionItem>
-      </Group.ArtDirection>
     </Group>
   )
 }

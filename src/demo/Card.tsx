@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import Font from '../components/Font'
+import Group from '../components/Group'
 
 interface Props {
   title: string
@@ -9,10 +10,15 @@ interface Props {
 const Card = (props: Props) => {
   const { children, title } = props
   return (
-    <article className="card">
+    <Group
+      as="article"
+      flexDirection="column"
+      gap="var(--gap-2)"
+      className="card"
+    >
       <Font>{title}</Font>
       {children}
-    </article>
+    </Group>
   )
 }
 
@@ -20,10 +26,10 @@ Card.Mini = (props: Props) => {
   const { children, title } = props
 
   return (
-    <div className="mini-card">
+    <li className="mini-card">
       <Font>{title}</Font>
       {children}
-    </div>
+    </li>
   )
 }
 export default Card

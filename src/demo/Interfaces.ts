@@ -11,4 +11,5 @@ export interface Selection {
 export interface Badges {
   allIngredients: string
   none: string
+  some: string
 }

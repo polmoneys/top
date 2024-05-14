@@ -32,14 +32,7 @@ interface Props {
 function Emoji(props: Props) {
   const { name } = props
 
-  return (
-    <span
-      aria-label={name}
-      // className={clsx(styles.emoji, active && styles.active)}
-    >
-      {emojis[name]}
-    </span>
-  )
+  return <span aria-label={name}>{emojis[name]}</span>
 }
 
 export default Emoji
