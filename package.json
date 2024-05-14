@@ -9,6 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "e2e": "npx playwright test",
+    "e2e:codegen": "npx playwright codegen http://127.0.0.1:5173",
     "e2e:ui": "npx playwright test --ui",
     "e2e:report": "npx playwright show-report playwright/report/"
   },
@@ -28,7 +29,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "prettier": "3.2.5",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0"
   }
 }
