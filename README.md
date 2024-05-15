@@ -23,7 +23,7 @@ When working with complex collections and **lists** we may need a headless displ
 
 ### Tests
 
-I'm in `love` with Playwright **e2e** testing as it gives me a **user clicking on things in the screen** so probably will never write 1 more unit test ever again.  
+I'm in `love` with Playwright **e2e** testing as it gives me the right vibe of **user-clicking-on things** so probably will never write unit tests ever again.  
 
 ```bash
 
