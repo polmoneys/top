@@ -18,8 +18,7 @@ Finally, `useItem` will help add temporary data to **T**.
 
 When working with complex collections and **lists** we may need a headless display of items, this is why `<Collection/>` exists. You can mix data sources and prepend collections with titles, dividers or maintain zebra backgrounds as them are parentless.`<Slot/>` adds start/end slots to an **item** of a `<Collection/>`, can be consumed as `<Collection.Item/>` for convenience.
  
-**Text** is the most critical part of content so we need a  `<Font/>`for some sugar (hint: if you have lots of numbers to display have a prop for it). 
-
+**Text** is the most critical part of content so we need a `<Font/>`for some sugar (hint: if you have lots of numbers to display have a prop for it). 
 
 ### Tests
 
